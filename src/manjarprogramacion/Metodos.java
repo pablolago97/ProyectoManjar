@@ -12,7 +12,7 @@ public class Metodos {
     
     
     public int generarNumero (){
-        int numeroAleatorio = (int) (Math.random()*25);
+        int numeroAleatorio = (int) (Math.random()*5);
         return numeroAleatorio;
     }
     //metodo sin hacer
@@ -20,11 +20,15 @@ public class Metodos {
         File f ;
         Scanner sc= null;
         try {
-            f = new File ("archivoCanciones.txt");
+            f = new File ("src/manjarprogramacion/archivoCanciones.txt");
             sc = new Scanner (f);
             while (sc.hasNext()){
                 String res = sc.nextLine();
                 System.out.println(res);
+                int numeroCancion = Integer.parseInt(res.substring(0,1));
+                if (numeroCancion == n){
+                    System.out.println("funciona");
+                }
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Error 1 "+ ex.toString());
