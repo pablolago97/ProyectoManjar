@@ -2,39 +2,58 @@ package manjarprogramacion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author gallegomanuel88
  */
 public class Metodos {
-    
-    
-    public int generarNumero (){
-        int numeroAleatorio = (int) (Math.random()*5);
+
+    public Clip clip;
+    public String ruta = "/audio/";
+
+    public int generarNumero() {
+        int numeroAleatorio = (int) (Math.random() * 5);
         return numeroAleatorio;
     }
+
     //metodo sin hacer
-    public void leerArchivo (int n){
-        File f ;
-        Scanner sc= null;
+
+    public void leerArchivo(int n) {
+        File f;
+        Scanner sc = null;
         try {
-            f = new File ("src/manjarprogramacion/archivoCanciones.txt");
-            sc = new Scanner (f);
-            while (sc.hasNext()){
+            f = new File("src/manjarprogramacion/archivoCanciones.txt");
+            sc = new Scanner(f);
+            while (sc.hasNextLine()) {
                 String res = sc.nextLine();
                 System.out.println(res);
-                int numeroCancion = Integer.parseInt(res.substring(0,1));
-                if (numeroCancion == n){
-                    System.out.println("funciona");
+                String [] arrayNumeroCancion = res.split(",");
+                String [] arrayTituloCancion = res.split(".");
+                if (Integer.parseInt(arrayNumeroCancion[0]) == n) {
+                    sonido(arrayTituloCancion[0]);
                 }
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Error 1 "+ ex.toString());
-        }
-        finally {
+            System.out.println("Error 1 " + ex.toString());
+        } finally {
             sc.close();
+        }
+    }
+
+    public void sonido (String archivo) {
+
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(ruta + archivo + ".wav")));
+            clip.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
         }
     }
 }
