@@ -19,7 +19,7 @@ public class Metodos {
     public String ruta = "/audio/";
 
     public int generarNumero() {
-        int numeroAleatorio = (int) (Math.random() * 5);
+        int numeroAleatorio = (int) (Math.random() * 128);
         return numeroAleatorio;
     }
 
@@ -29,7 +29,7 @@ public class Metodos {
         File f;
         Scanner sc = null;
         try {
-            f = new File("src/manjarprogramacion/archivoCanciones.txt");
+            f = new File("src/manjarprogramacion/voces.txt");
             sc = new Scanner(f);
             while (sc.hasNextLine()) {
                 String res = sc.nextLine();
@@ -37,6 +37,7 @@ public class Metodos {
                 String [] arrayNumeroCancion = res.split(",");
                 String [] arrayTituloCancion = res.split(".");
                 if (Integer.parseInt(arrayNumeroCancion[0]) == n) {
+                    System.out.println(arrayTituloCancion[0]);
                     sonido(arrayTituloCancion[0]);
                 }
             }
