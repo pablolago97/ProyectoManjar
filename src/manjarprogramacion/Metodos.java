@@ -16,7 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Metodos {
 
     public Clip clip;
-    public String ruta = "/audio/";
+    public String ruta = "/voces/";
 
     public int generarNumero() {
         int numeroAleatorio = (int) (Math.random() * 128);
